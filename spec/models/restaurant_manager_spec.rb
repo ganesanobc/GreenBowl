@@ -12,4 +12,12 @@ RSpec.describe RestaurantManager, type: :model do
       expect{ create(:restaurant_manager, :with_siteamdin) }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
+
+  context "unqiueness" do
+    it "duplicates not allowed" do
+      rm = create(:restaurant_manager, :with_manager)
+      dup = RestaurantManager.new(restaurant:rm.restaurant, manager:rm.manager)
+      expect{ dup.save }.to raise_error(ActiveRecord::RecordNotUnique)
+    end
+  end
 end

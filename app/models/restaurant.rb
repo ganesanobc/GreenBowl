@@ -7,6 +7,7 @@ class Restaurant < ApplicationRecord
     class_name: "Admin",
     foreign_key: 'restaurant_id'
   has_many :kitchens
+  has_many :carts
 
   # validations
   validates :brand, presence: true, uniqueness: {

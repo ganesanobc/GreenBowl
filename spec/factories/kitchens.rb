@@ -1,7 +1,9 @@
+require 'faker'
+
 FactoryBot.define do
   factory :kitchen do
-    name "MyString"
-    description "MyText"
+    sequence(:name) { |n| "#{Faker::Company.name} #{n}" }
+    description { Faker::Company.buzzword }
     restaurant { create(:restaurant) }
   end
 end

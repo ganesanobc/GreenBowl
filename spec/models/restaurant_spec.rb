@@ -17,5 +17,6 @@ RSpec.describe Restaurant, type: :model do
   context "associations" do
     it { should have_and_belong_to_many(:managers).join_table("restaurant_managers") }
     it { should have_many(:kitchens) }
+    it { should have_many(:carts) }
   end
 end

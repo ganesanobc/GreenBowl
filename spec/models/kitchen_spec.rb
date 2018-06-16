@@ -15,7 +15,7 @@ RSpec.describe Kitchen, type: :model do
   context "associations" do
     it { should have_one(:kitchen_operator) }
     it { should have_one(:operator) }
-    # it { should has_many(:products) }
-    # it { should has_many(:order_items) }
+    it { should have_many(:products) }
+    it { should have_many(:orders) }
   end
 end
