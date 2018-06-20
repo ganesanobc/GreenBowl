@@ -8,6 +8,8 @@ class Restaurant < ApplicationRecord
     foreign_key: 'restaurant_id'
   has_many :kitchens
   has_many :carts
+  has_many :categories
+  has_many :products, through: :kitchens
 
   # validations
   validates :brand, presence: true, uniqueness: {

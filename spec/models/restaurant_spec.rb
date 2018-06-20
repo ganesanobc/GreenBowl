@@ -18,5 +18,7 @@ RSpec.describe Restaurant, type: :model do
     it { should have_and_belong_to_many(:managers).join_table("restaurant_managers") }
     it { should have_many(:kitchens) }
     it { should have_many(:carts) }
+    it { should have_many(:categories) }
+    it { should have_many(:products) }
   end
 end

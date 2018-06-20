@@ -1,0 +1,18 @@
+<% content_for :title, @restaurant.brand %>
+
+<h1><div id="brand"><%= @restaurant.brand %></div></h1>
+<h3><div id="branch"><%= @restaurant.branch %></div></h3>
+
+<div>
+  <% unless @categories.nil? %>
+    <% @categories.each do |cat| %>
+      <% products = cat.products.in_stock.all %>
+      <% if products.length > 0 %>
+        <h3><%= cat.title %></h3>
+        <% products.each do |product| %>
+          <div><%= product.title %> <strong>$ <%= product.price %></strong></div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
