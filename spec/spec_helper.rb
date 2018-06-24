@@ -94,8 +94,3 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
-
-def dputs(message)
-  Rails.logger.info(message)
-  puts ">>> #{message} <<<"
-end
