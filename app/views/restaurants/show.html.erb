@@ -10,8 +10,18 @@
       <% if products.length > 0 %>
         <h3><%= cat.title %></h3>
         <% products.each do |product| %>
-          <div><%= product.title %> <strong>$ <%= product.price %></strong></div>
-        <% end %>
+          <div>
+            <%= product.title %>
+            <strong>$ <%= product.price %></strong>
+            <%= form_tag url_for(:controller => 'orders', :action => 'create'), :method => 'post' do %>
+              <%= hidden_field_tag :product_id, product.id %>
+              <%= hidden_field_tag :kitchen_id, product.kitchen.id %>
+              <%= hidden_field_tag :cart_id, @cart.id %>
+              <%= hidden_field_tag :quantity, 1 %>
+              <%= submit_tag "Add to Cart" if @cart.open? && product.available? %>
+            <% end %>
+          </div>
+          <% end %>
       <% end %>
     <% end %>
   <% end %>

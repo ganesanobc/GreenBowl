@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :cart do
     state 1
-    restaurant nil
-    customer nil
+    restaurant { create(:restaurant) }
+    customer { create(:customer) }
   end
 end

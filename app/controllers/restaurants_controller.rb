@@ -5,7 +5,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1
   def show
     # get the current active cart or a new one for the customer
-    validate_active_cart
+    @cart = validate_active_cart
 
     # return the categories (and the corresponding products)
     @categories = @restaurant.categories

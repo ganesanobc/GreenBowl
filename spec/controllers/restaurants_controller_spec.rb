@@ -4,6 +4,23 @@ RSpec.describe RestaurantsController, type: :controller do
   before(:all) do
     @restaurant = create(:restaurant)
     @customer = create (:customer)
+
+    # create a kitchen
+    kitchen = create(:kitchen, restaurant: @restaurant)
+
+    # create the food categories
+    category1 = create(:category, restaurant: @restaurant)
+    category2 = create(:category, restaurant: @restaurant)
+
+    # create the dishes for the kitchen
+    @dish1 = create(:product, kitchen: kitchen)
+    @dish2 = create(:product, kitchen: kitchen)
+    @dish3 = create(:product, available: "out_of_stock", kitchen: kitchen)
+
+    # assign category 1 to the dishes
+    create(:product_category, product: @dish1, category: category1)
+    create(:product_category, product: @dish2, category: category1)
+    create(:product_category, product: @dish3, category: category2)
   end
 
   before(:each) do
