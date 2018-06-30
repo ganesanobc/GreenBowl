@@ -13,6 +13,9 @@ class OrdersController < ApplicationController
         dup.update!( quantity: dup.quantity+1 )
       end
     end
+
+    # redirect back to the restaurants page
+    redirect_to cart.restaurant
   end
 
   private

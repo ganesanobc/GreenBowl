@@ -4,6 +4,20 @@
 <h3><div id="branch"><%= @restaurant.branch %></div></h3>
 
 <div>
+  <% unless @cart.nil? %>
+    <% @cart.orders.each do |order| %>
+      <% product = order.product %>
+      <div>
+        <%= product.title %>
+        $ <%= product.price %> x <%= order.quantity %> = <strong>$ <%= order.sub_total_price %></strong>
+      </div>
+    <% end %>
+    <div>Total: <strong>$<%= @cart.total_price %></strong></div>
+  <% end %>
+</div>
+
+
+<div>
   <% unless @categories.nil? %>
     <% @categories.each do |cat| %>
       <% products = cat.products.in_stock.all %>

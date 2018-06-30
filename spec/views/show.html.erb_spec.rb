@@ -22,6 +22,12 @@ RSpec.describe "restaurants/show.html.erb", type: :view do
     create(:product_category, product: @dish3, category: @category2)
 
     @cart = create(:cart, restaurant: @restaurant, customer: create(:customer), state: "open")
+
+    # create orders
+    customer = create(:customer)
+    @order1 = create(:order, cart:@cart, product: @dish1, kitchen: kitchen, customer: customer)
+    @order2 = create(:order, cart:@cart, product: @dish2, kitchen: kitchen, customer: customer)
+    create(:order, cart:@cart, product: @dish1, kitchen: kitchen, customer: customer)
   end
 
   context "when a visiting a restaurant's page" do
@@ -64,6 +70,18 @@ RSpec.describe "restaurants/show.html.erb", type: :view do
 
       # should not show category 2 since it has no dishes
       expect(rendered).to_not have_content @category2.title
+    end
+  end
+
+  context "when customer has added products to the cart" do
+    it "should display all products and their quantities" do
+      assign(:products, @restaurant.products)
+      assign(:categories, @restaurant.categories)
+      assign(:cart, @cart)
+      render
+
+      # should show total price
+      expect(rendered).to have_content "Total: $#{@cart.total_price}"
     end
   end
 
