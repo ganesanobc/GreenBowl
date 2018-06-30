@@ -67,11 +67,4 @@ RSpec.describe RestaurantsController, type: :controller do
       end
     end
   end
-
-  context "when customer adds products to the cart" do
-    it "should increase the orders count if a new type of product is added"
-    it "should not increase the orders count if the same product is added"
-    it "should compute the total cost of the cart"
-  end
-
 end

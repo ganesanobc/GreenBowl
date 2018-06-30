@@ -11,6 +11,15 @@ class RestaurantsController < ApplicationController
     @categories = @restaurant.categories
   end
 
+  protected
+    def active_cart
+      cart = current_customer.carts.open.first ||
+        current_customer.carts.open.create!(restaurant:@restaurant)
+      cart
+    end
+
+    helper_method :active_cart
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant
@@ -32,13 +41,4 @@ class RestaurantsController < ApplicationController
 
       cart
     end
-
-  protected
-    def active_cart
-      cart = current_customer.carts.open.first ||
-        current_customer.carts.open.create!(restaurant:@restaurant)
-      cart
-    end
-
-    helper_method :active_cart
 end

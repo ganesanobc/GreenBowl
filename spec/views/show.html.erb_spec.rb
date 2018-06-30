@@ -20,6 +20,8 @@ RSpec.describe "restaurants/show.html.erb", type: :view do
     create(:product_category, product: @dish1, category: @category1)
     create(:product_category, product: @dish2, category: @category1)
     create(:product_category, product: @dish3, category: @category2)
+
+    @cart = create(:cart, restaurant: @restaurant, customer: create(:customer), state: "open")
   end
 
   context "when a visiting a restaurant's page" do
@@ -35,6 +37,7 @@ RSpec.describe "restaurants/show.html.erb", type: :view do
 
       assign(:products, @restaurant.products)
       assign(:categories, @restaurant.categories)
+      assign(:cart, @cart)
       render
 
       # should show dish 1
@@ -53,6 +56,7 @@ RSpec.describe "restaurants/show.html.erb", type: :view do
 
       assign(:products, @restaurant.products)
       assign(:categories, @restaurant.categories)
+      assign(:cart, @cart)
       render
 
       # should show category 1
