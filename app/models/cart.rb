@@ -6,7 +6,7 @@ class Cart < ApplicationRecord
   # relationships
   belongs_to :restaurant
   belongs_to :customer
-  has_many :orders
+  has_many :orders, dependent: :delete_all
 
   # validations
   enum state: [:open, :closed, :archived]

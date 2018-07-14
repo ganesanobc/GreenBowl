@@ -32,16 +32,19 @@ RSpec.describe OrdersController, type: :controller do
       expect {
         post :create, params: @order2_attributes
       }.to change(@cart.orders, :count).by(1)
+      @cart.reload
     end
     it "should not increase the orders count if the same product is added" do
       expect {
         post :create, params: @order1_attributes
       }.to change(@cart.orders, :count).by(0)
+      @cart.reload
 
       expect(@cart.orders.first.quantity).to be_eql 2
     end
     it "should compute the total cost of all the items in the order" do
       post :create, params: @order1_attributes
+      @cart.reload
       expect(@cart.orders.first.sub_total_price).to be_eql @sub_total_price
     end
   end

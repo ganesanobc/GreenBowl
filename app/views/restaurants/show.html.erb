@@ -10,6 +10,26 @@
       <div>
         <%= product.title %>
         $ <%= product.price %> x <%= order.quantity %> = <strong>$ <%= order.sub_total_price %></strong>
+        <% if @cart.open? && product.available? %>
+          <%= form_tag url_for(:controller => 'orders', :action => 'create'), :method => 'post' do %>
+            <%= hidden_field_tag :product_id, product.id %>
+            <%= hidden_field_tag :kitchen_id, product.kitchen_id %>
+            <%= hidden_field_tag :cart_id, @cart.id %>
+            <%= hidden_field_tag :quantity, 1 %>
+            <%= submit_tag "+" %>
+          <% end %>
+          <%= form_tag url_for(:controller => 'orders', :action => 'create'), :method => 'post' do %>
+            <%= hidden_field_tag :product_id, product.id %>
+            <%= hidden_field_tag :kitchen_id, product.kitchen_id %>
+            <%= hidden_field_tag :cart_id, @cart.id %>
+            <%= hidden_field_tag :quantity, -1 %>
+            <% if order.quantity == 1  %>
+              <%= submit_tag "-", data: {confirm: "Are you sure?"} %>
+            <% else %>
+              <%= submit_tag "-" %>
+            <% end %>
+          <% end %>
+        <% end  %>
       </div>
     <% end %>
     <div>Total: <strong>$<%= @cart.total_price %></strong></div>

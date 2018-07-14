@@ -10,7 +10,12 @@ class OrdersController < ApplicationController
         @order = Order.selected.create!(order_params)
       else
         # just increase the quantity of existing order
-        dup.update!( quantity: dup.quantity+1 )
+        inc = order_params[:quantity].to_i
+        if dup.quantity + inc <= 0
+          dup.destroy!
+        else
+          dup.update!( quantity: dup.quantity+inc )
+        end
       end
     end
 
